@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 09:36:53 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/18 10:33:24 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/18 09:21:43 by jmouette          #+#    #+#             */
+/*   Updated: 2024/04/18 10:12:26 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+//#include "libft.c"
+
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (c > 31 && c < 127)
-		return (1);
-	return (0);
-}
+

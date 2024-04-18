@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 09:36:53 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/18 10:33:24 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/17 13:05:14 by jmouette          #+#    #+#             */
+/*   Updated: 2024/04/18 10:53:58 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+#include "libft.h"
+
+char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	if (c > 31 && c < 127)
-		return (1);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (s2[j] == 0)
+		return ((char *)s1);
+	while (s1[i] != '\0' && i < len)
+	{
+		while (s1[i + j] == s2[j] && (i + j) < len && s1[i] != '\0')
+		{
+			if (s2[j + 1] == 0)
+				return ((char *)s1 + i);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 	return (0);
 }
