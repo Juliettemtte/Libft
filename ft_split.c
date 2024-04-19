@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 15:18:39 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/19 14:29:04 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/19 14:34:31 by jmouette          #+#    #+#             */
+/*   Updated: 2024/04/19 15:14:45 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+//#include "libft.c"
+
+static void	ft_free(char *s)
+{
+	while (s)
+		free(s);
+	free(s);
+}
+
+static int	count_words(char const *s, char c)
 {
 	int	i;
-	int	sign;
-	int	result;
+	int	w;
+	int	t;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	if (str[i] == '-')
+	w = 0;
+	t = 0;
+	while (s[i] != '\0')
 	{
-		sign = -1;
+		if (s[i] != c && t == 0)
+		{
+			w++;
+			t = 1;
+		}
+		else if (s[i] == c)
+			t = 0;
 		i++;
 	}
-	if (str[i] == '+')
-		i++;
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		result = result * 10 + (str[i] - 48);
-		i++;
-	}
-	return (sign * result);
+	return (w);
 }
+
+/*
+char	**ft_split(char const *s, char c)
+{
+*/

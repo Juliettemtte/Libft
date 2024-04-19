@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 15:18:39 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/19 14:29:04 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/19 12:19:32 by jmouette          #+#    #+#             */
+/*   Updated: 2024/04/19 12:42:03 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int	i;
-	int	sign;
-	int	result;
+	unsigned int	i;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	if (str[i] == '-')
+	while (s[i] != '\0')
 	{
-		sign = -1;
+		(*f)(i, &s[i]);
 		i++;
 	}
-	if (str[i] == '+')
-		i++;
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		result = result * 10 + (str[i] - 48);
-		i++;
-	}
-	return (sign * result);
 }

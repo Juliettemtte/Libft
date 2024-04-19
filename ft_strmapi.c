@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 15:18:39 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/19 14:29:04 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/19 11:47:53 by jmouette          #+#    #+#             */
+/*   Updated: 2024/04/19 12:19:06 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	i;
-	int	sign;
-	int	result;
+	unsigned int	i;
+	char			*result;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	if (str[i] == '-')
+	result = (char *)malloc(sizeof(char) * ft_strlen(s));
+	if (result == NULL)
+		return (NULL);
+	while (i < ft_strlen(s))
 	{
-		sign = -1;
+		result[i] = (*f)(i, s[i]);
 		i++;
 	}
-	if (str[i] == '+')
-		i++;
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		result = result * 10 + (str[i] - 48);
-		i++;
-	}
-	return (sign * result);
+	result[i] = '\0';
+	return (result);
 }
