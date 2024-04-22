@@ -6,43 +6,53 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:34:31 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/19 15:14:45 by jmouette         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:14:24 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.c"
-
-static void	ft_free(char *s)
-{
-	while (s)
-		free(s);
-	free(s);
-}
+#include "libft.h"
 
 static int	count_words(char const *s, char c)
 {
-	int	i;
-	int	w;
-	int	t;
+	int	count;
 
-	i = 0;
-	w = 0;
-	t = 0;
-	while (s[i] != '\0')
+	count = 0;
+	while (*s)
 	{
-		if (s[i] != c && t == 0)
+		if (*s != c)
 		{
-			w++;
-			t = 1;
+			count++;
+			while (*s && *s != c)
+				s++;
 		}
-		else if (s[i] == c)
-			t = 0;
-		i++;
+		else
+			s++;
 	}
-	return (w);
+	return (count);
 }
 
-/*
 char	**ft_split(char const *s, char c)
 {
-*/
+	char		**result;
+	int			i;
+	const char	*start;
+
+	result = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
+	i = 0;
+	if (!result)
+		return (0);
+	while (*s)
+	{
+		if (*s != c)
+		{
+			start = s;
+			while (*s && *s != c)
+				s++;
+			result[i++] = ft_substr(start, 0, s - start);
+		}
+		else
+			s++;
+	}
+	result[i] = 0;
+	return (result);
+}
