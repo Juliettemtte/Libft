@@ -1,37 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 12:08:41 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/22 14:31:03 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/22 10:14:55 by jmouette          #+#    #+#             */
+/*   Updated: 2024/04/22 14:14:40 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static int	ft_len_nb(int n)
 {
-	size_t	i;
-	size_t	j;
-	char	*result;
+	int	len;
 
-	i = 0;
-	j = 0;
-	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (result == NULL)
-		return (0);
-	while (s[i])
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
 	{
-		if (i >= start && j < len)
-		{
-			result[j] = s[i];
-			j++;
-		}
-		i++;
+		len++;
+		n /= 10;
 	}
-	result[j] = '\0';
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*result;
+	int		i;
+
+	result = (char *)malloc((ft_len_nb(n) + 1) * sizeof(char));
+	if (!result)
+		return (0);
+	if (n < 0)
+		n = -n;
+	i = ft_len_nb(n) - 1;
+	while (n != 0)
+	{
+		result[i] = (n % 10) + 48;
+		n = n / 10;
+		i--;
+	}
+	if (i < 0)
+		result[0] = '-';
+	result[ft_len_nb(n)] = '\0';
 	return (result);
 }

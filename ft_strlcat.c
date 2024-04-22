@@ -6,32 +6,29 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:50:18 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/19 15:35:59 by jmouette         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:51:33 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	j;
+	size_t	len_d;
+	size_t	len_s;
 
-	i = 0;
-	j = 0;
-	while (dst[i] && i < size)
-		i++;
-	while ((i + j + 1) < size)
+	len_d = ft_strlen(dst);
+	len_s = ft_strlen(src);
+	if (len_d >= dstsize)
+		len_d = dstsize;
+	if (len_d == dstsize)
+		return (dstsize + len_s);
+	if (len_s < dstsize - len_d)
+		ft_memcpy(dst + len_d, src, len_s + 1);
+	else
 	{
-		while (src[j])
-		{
-			dst[i] = src[j];
-			i++;
-			j++;
-		}
-		j = 0;
+		ft_memcpy(dst + len_d, src, dstsize - len_d - 1);
+		dst[dstsize - 1] = '\0';
 	}
-	if (i < size)
-		dst[i + j] = '\0';
-	return (i + j + ft_strlen(src));
+	return (len_d + len_s);
 }
