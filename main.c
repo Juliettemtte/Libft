@@ -148,11 +148,11 @@ printf("// ****************************** ft_memcpy ****************************
 	memcpy(dest, src, strlen(src) + 1);
 	printf("og : %s \n", dest);
 
-*/
+
 printf("// ****************************** ft_memmove ******************************* \\\\ \n");
 
 	char src[] = "Bonjour tout le m0nde!";
-	char dest[20] = "Bonjour t";
+	char dest[40] = "Bonjour t";
 	size_t len = strlen(src) + 1;
 
 	ft_memmove(dest, src, len);
@@ -160,7 +160,7 @@ printf("// ****************************** ft_memmove ***************************
 	memmove(dest, src, len);
 	printf("og : %s \n", dest);
 
-/*
+
 printf("// ****************************** ft_memset ******************************* \\\\ \n");
 
 	int	array[] = {54, 85, 20, 64, 37};
@@ -186,8 +186,8 @@ printf("// ****************************** ft_memset ****************************
 
 printf("// ****************************** ft_strchr ******************************* \\\\ \n");
 
-	const char	s[]="Bonjour";
-	int c = 'o';
+	const char	s[]="teste";
+	int c = 'e' + 256;
 	printf("ft : %s \n", ft_strchr(s, c));
 	printf("og : %s \n", strchr(s, c));
 
@@ -319,11 +319,23 @@ printf("%s", "// ****************************** ft_strtrim *********************
 
 printf("// ****************************** ft_split ******************************* \\\\ \n");
 
-	char const *s = "Bonjour tout le monde";
-	char	c = ' ';
+	char const *s = "Bonjour-tout-le-monde";
+	char		**result = ft_split(s, '-');
+	if (result == NULL)
+		printf("Allocation error\n");
+	while (*result)
+	{
+		printf("%s \n", *result);
+		free(*result);
+		result++;
+	}
+	free(*result);
+	return 0;
+	
+
+printf("// ****************************** ft_itoa ******************************* \\\\ \n");
 
 
-printf("// ****************************** ft_iota ******************************* \\\\ \n");
 
 
 printf("// ****************************** ft_strmapi ******************************* \\\\ \n");
