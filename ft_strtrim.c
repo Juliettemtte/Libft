@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 09:38:13 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/22 14:47:00 by jmouette         ###   ########.fr       */
+/*   Updated: 2024/04/23 09:36:49 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	const char	*end;
+	char		*str;
+	size_t		size;
 
-	i = 0;
-	j = ft_strlen(s1);
-	str = 0;
-	if (s1 != 0 && set != 0)
-	{
-		while (s1[i] && ft_strchr(set, s1[i]))
-			i++;
-		while (s1[j - 1] && ft_strchr(set, s1[j - 1]) && j > i)
-			j--;
-		str = (char *)malloc(sizeof(char) * (j - i + 1));
-		if (str)
-			ft_strlcpy(str, &s1[i], (j - i + 1));
-	}
+	if (!s1 || !set)
+		return (0);
+	while (*s1 && ft_strchr(set, *s1) != 0)
+		s1++;
+	end = s1 + ft_strlen(s1) - 1;
+	while (end > s1 && ft_strchr(set, *end) != 0)
+		end--;
+	size = (end - s1) + 1;
+	str = (char *)malloc((size + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	ft_memcpy(str, s1, size);
+	str[size] = '\0';
 	return (str);
 }

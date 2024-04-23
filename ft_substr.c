@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:08:41 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/22 14:31:03 by jmouette         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:00:30 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	i = 0;
 	j = 0;
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (result == NULL)
 		return (0);
