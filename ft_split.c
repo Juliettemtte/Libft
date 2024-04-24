@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:34:31 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/22 10:14:24 by jmouette         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:05:39 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
+void	*free_array(char **result, int i)
+{
+	while (--i >= 0)
+	{
+		free(result[i]);
+	}
+	free(result);
+	return (0);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char		**result;
@@ -48,7 +58,10 @@ char	**ft_split(char const *s, char c)
 			start = s;
 			while (*s && *s != c)
 				s++;
-			result[i++] = ft_substr(start, 0, s - start);
+			result[i] = ft_substr(start, 0, s - start);
+			if (result[i] == NULL)
+				return (free_array(result, i));
+			i++;
 		}
 		else
 			s++;
