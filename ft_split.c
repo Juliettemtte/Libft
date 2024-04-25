@@ -31,13 +31,15 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-void	*free_array(char **result, int i)
+void	*free_array(char ***result, int i)
 {
 	while (--i >= 0)
 	{
-		free(result[i]);
+		free((*result)[i]);
+		(*result)[i] = NULL;
 	}
-	free(result);
+	free(*result);
+	(*result) = NULL;
 	return (0);
 }
 
@@ -60,7 +62,7 @@ char	**ft_split(char const *s, char c)
 				s++;
 			result[i] = ft_substr(start, 0, s - start);
 			if (result[i] == NULL)
-				return (free_array(result, i));
+				return (free_array(&result, i));
 			i++;
 		}
 		else
