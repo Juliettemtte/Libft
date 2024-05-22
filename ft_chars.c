@@ -1,18 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_chars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 09:12:18 by jmouette          #+#    #+#             */
-/*   Updated: 2024/05/09 13:58:05 by jmouette         ###   ########.fr       */
+/*   Created: 2024/04/29 10:00:09 by jmouette          #+#    #+#             */
+/*   Updated: 2024/05/22 10:39:51 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+#include "libft.h"
+
+int	ft_putchar_len(char c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
+	if (write(1, &c, 1) == -1)
+		return (-1);
+	return (1);
+}
+
+int	ft_string(char *str)
+{
+	int	len;
+
+	len = 0;
+	if (!str)
+	{
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
+		len = 6;
+		return (len);
+	}
+	while (*str)
+	{
+		if (ft_putchar_len(*str) == -1)
+			return (-1);
+		str++;
+		len++;
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:21:43 by jmouette          #+#    #+#             */
-/*   Updated: 2024/04/19 15:28:36 by jmouette         ###   ########.fr       */
+/*   Updated: 2024/05/06 09:28:08 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t			total;
 
 	total = count * size;
-	if (count > 0 && total > 0 && (total / count != size))
+	if (count > 0 && size > 0 && (total / count != size))
 		return (NULL);
 	s = malloc(total);
 	i = 0;
