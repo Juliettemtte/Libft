@@ -1,5 +1,6 @@
-# Libft
-
+<h1 align="center">
+	Libft
+</h1>
 <p align="center">
 	<b><i>Your very first own library</i></b><br>
 </p>
